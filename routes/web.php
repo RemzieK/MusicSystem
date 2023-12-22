@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::redirect('/', '/index');
 
 Route::middleware([
     'auth:sanctum',
@@ -25,4 +24,19 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+Route::get('/author', function () {
+    return view('author');
+});
+
+Route::get('/create', function () {
+    return view('create');
+});
+
+Route::get('/explore', function () {
+    return view('explore');
+});
+
+Route::get('/index', function () {
+    return view('index');
 });
