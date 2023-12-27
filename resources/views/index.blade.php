@@ -1,4 +1,4 @@
-<!-- Example in your Blade view -->
+
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
 
@@ -26,13 +26,7 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-<!--
 
-TemplateMo 577 Liberty Market
-
-https://templatemo.com/tm-577-liberty-market
-
--->
   </head>
 
 <body>
@@ -63,11 +57,24 @@ https://templatemo.com/tm-577-liberty-market
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                    <li><a href="index"class="active">Home</a></li>
-                        <li><a href="explore">Explore</a></li>
-                        <li><a href="author">AdminPanel</a></li>
-                        <li><a href="create">?</a></li>
-                    </ul>   
+    <li><a href="{{ url('index') }}">Home</a></li>
+    <li><a href="{{ url('explore') }}">Explore</a></li>
+    @if(session('user'))
+       
+        <li>
+            <form method="POST" action="{{ url('index') }}">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
+        </li>
+    @else
+       
+        <li><a href="{{ url('author') }}">Register</a></li>
+        <li><a href="{{ url('create') }}">Login</a></li>
+    @endif
+</ul>
+
+  
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>

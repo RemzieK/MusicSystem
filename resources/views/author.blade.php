@@ -1,4 +1,4 @@
-<!-- Example in your Blade view -->
+
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
 
@@ -27,13 +27,7 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-<!--
 
-TemplateMo 577 Liberty Market
-
-https://templatemo.com/tm-577-liberty-market
-
--->
   </head>
 
 <body>
@@ -64,11 +58,25 @@ https://templatemo.com/tm-577-liberty-market
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index">Home</a></li>
-                        <li><a href="explore">Explore</a></li>
-                        <li><a href="author" class="active">AdminPanel</a></li>
-                        <li><a href="create">?</a></li>
-                    </ul>   
+    <li><a href="{{ url('index') }}">Home</a></li>
+    <li><a href="{{ url('explore') }}">Explore</a></li>
+    @if(session('user'))
+       
+        <li>
+            <form method="POST" action="{{ url('index') }}">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
+        </li>
+    @else
+       
+        <li><a href="{{ url('author') }}">Register</a></li>
+        <li><a href="{{ url('create') }}">Login</a></li>
+    @endif
+</ul>
+
+
+ 
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -85,7 +93,7 @@ https://templatemo.com/tm-577-liberty-market
       <div class="row">
         <div class="col-lg-12">
           <h6>AdminPanel</h6>
-          <h2>Login to your account.</h2>
+          <h2>Register now</h2>
           <span>Home > <a href="#">AdminPanel</a></span>
           <div class="buttons">
             <div class="main-button">
@@ -93,13 +101,56 @@ https://templatemo.com/tm-577-liberty-market
             </div>
             <div class="border-button">
               <a href="create.html">?</a>
+
+
+@extends('layouts.app')
+
+@section('content')
+    <div style="text-align: center;">
+        <h2>Admin Registration</h2>
+
+        <form method="POST" action="{{ url('author') }}" style="border: 3px solid #f1f1f1; width: 60%; margin: auto; margin-top: 10%; padding: 16px;">
+            @csrf
+
+            <div style="margin-bottom: 16px;">
+                <label for="name">Name</label>
+                <input type="text" name="name" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+                <label for="email">Email</label>
+                <input type="email" name="email" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+                <label for="password">Password</label>
+                <input type="password" name="password" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+                <label for="role">Role</label>
+                <input type="text" name="role" value="admin" readonly style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;">
+            </div>
+
+            <button type="submit" style="background-color: #aa048b; color: white; padding: 14px 20px; margin: 8px 0; border: none; cursor: pointer; width: 100%;">Register</button>
+        </form>
+    </div>
+@endsection
+
+
+
+
+
+
+
+
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+  
 
   <div class="create-nft">
     <div class="container">
@@ -151,6 +202,9 @@ https://templatemo.com/tm-577-liberty-market
       </div>
     </div>
   </div>
+
+
+
 
 
   <footer>

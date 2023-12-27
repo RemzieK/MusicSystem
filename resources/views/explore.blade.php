@@ -1,4 +1,4 @@
-<!-- Example in your Blade view -->
+
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
 
@@ -26,13 +26,7 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-<!--
 
-TemplateMo 577 Liberty Market
-
-https://templatemo.com/tm-577-liberty-market
-
--->
   </head>
 
 <body>
@@ -63,11 +57,26 @@ https://templatemo.com/tm-577-liberty-market
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                    <li><a href="index">Home</a></li>
-                        <li><a href="explore"class="active">Explore</a></li>
-                        <li><a href="author" >AdminPanel</a></li>
-                        <li><a href="create">?</a></li>
-                  </ul>   
+    <li><a href="{{ url('index') }}">Home</a></li>
+    <li><a href="{{ url('explore') }}">Explore</a></li>
+    @if(session('user'))
+        
+        <li>
+            <form method="POST" action="{{ url('index') }}">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
+        </li>
+    @else
+        
+        <li><a href="{{ url('author') }}">Register</a></li>
+        <li><a href="{{ url('create') }}">Login</a></li>
+    @endif
+</ul>
+
+
+
+
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -157,6 +166,83 @@ https://templatemo.com/tm-577-liberty-market
     </div>
   </div>
 
+
+@extends('layouts.app')
+
+@section('content')
+
+    <h1>Database Table</h1>
+
+    <table style="border-collapse: collapse; width: 100%; border: 1px solid #ffffff;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid #ffffff;color: white;">Artist</th>
+                <th style="border: 1px solid #ffffff;color: white;">Album</th>
+                <th style="border: 1px solid #ffffff;color: white;">Genre</th>
+                <th style="border: 1px solid #ffffff;color: white;">Image</th>
+                @auth
+                    @if(Auth::user()->is_admin)
+                        <th style="border: 1px solid #ffffff;color: white;">Actions</th>
+                    @endif
+                @endauth
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($data as $item)
+                <tr>
+                    <td style="border: 1px solid #ffffff;color: white;">{{ $item->artist->name }}</td>
+                    <td style="border: 1px solid #ffffff;color: white;">{{ $item->name }}</td>
+                    <td style="border: 1px solid #ffffff;color: white;">{{ $item->genre->name }}</td>
+                    <td style="border: 1px solid #ffffff;color: white;">
+                        @if($item->images->isNotEmpty())
+                            <img src="data:image/png;base64,{{ base64_encode($item->images->first()->image_data) }}" alt="Album Image" style="width: 50px; height: 50px;">
+                        @endif
+                    </td>
+                    @auth
+                        @if(Auth::user()->is_admin)
+                            <td style="border: 1px solid #ffffff;color: white;">
+                                <a href="{{ route('albums.edit', ['album' => $item->id]) }}">Edit</a>
+                                <form action="{{ route('albums.update', ['album' => $item->id]) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit">Update</button>
+                                </form>
+                                <form action="{{ route('albums.destroy', ['album' => $item->id]) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>
+                                </form>
+                                <form action="{{ route('images.upload', ['album_id' => $item->id]) }}" method="POST" enctype="multipart/form-data" style="display: inline;">
+                                    @csrf
+                                    <input type="file" name="image">
+                                    <button type="submit">Upload Image</button>
+                                </form>
+                            </td>
+                        @endif
+                    @endauth
+                </tr>
+            @endforeach
+            @auth
+                @if(Auth::user()->is_admin)
+                    <tr>
+                        <form action="{{ route('albums.store') }}" method="POST">
+                            @csrf
+                            <td><input type="text" name="artist"></td>
+                            <td><input type="text" name="album"></td>
+                            <td><input type="text" name="genre"></td>
+                            <td><input type="file" name="image"></td>
+                            <td>
+                                <button type="submit">Create</button>
+                            </td>
+                        </form>
+                    </tr>
+                @endif
+            @endauth
+        </tbody>
+    </table>
+
+@endsection
+
   <div class="discover-items">
     <div class="container">
       <div class="row">
@@ -167,9 +253,7 @@ https://templatemo.com/tm-577-liberty-market
           </div>
         </div>
        
-       
-        
- 
+
 
   <footer>
     <div class="container">

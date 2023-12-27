@@ -1,4 +1,4 @@
-<!-- Example in your Blade view -->
+
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
 
@@ -14,7 +14,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <title>Liberty Template - Create NFT Page</title>
+    <title>MusicSystem</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,13 +26,7 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-<!--
 
-TemplateMo 577 Liberty Market
-
-https://templatemo.com/tm-577-liberty-market
-
--->
   </head>
 
 <body>
@@ -63,11 +57,25 @@ https://templatemo.com/tm-577-liberty-market
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                    <li><a href="index">Home</a></li>
-                        <li><a href="explore">Explore</a></li>
-                        <li><a href="author" >AdminPanel</a></li>
-                        <li><a href="create"class="active">?</a></li>
-                    </ul>   
+    <li><a href="{{ url('index') }}">Home</a></li>
+    <li><a href="{{ url('explore') }}">Explore</a></li>
+    @if(session('user'))
+        <!-- The user is logged in, show the logout button -->
+        <li>
+            <form method="POST" action="{{ url('index') }}">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
+        </li>
+    @else
+        <!-- The user is not logged in, show the registration and login links -->
+        <li><a href="{{ url('author') }}">Register</a></li>
+        <li><a href="{{ url('create') }}">Login</a></li>
+    @endif
+</ul>
+
+
+
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -195,13 +203,44 @@ https://templatemo.com/tm-577-liberty-market
     </div>
   </div>
 
+
+
+@extends('layouts.app')
+
+@section('content')
+    <h2>Admin Login</h2>
+
+   
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    <form method="POST" action="{{ url('create') }}">
+        @csrf
+
+      
+        <label for="email">Email</label>
+        <input type="email" name="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+@endsection
+
+
+
+
+
   <footer>
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <p>Copyright © 2022 <a href="#">Liberty</a> NFT Marketplace Co., Ltd. All rights reserved.
-          &nbsp;&nbsp;
-          Designed by <a title="HTML CSS Templates" rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+        
         </div>
       </div>
     </div>
