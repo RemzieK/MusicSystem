@@ -59,20 +59,24 @@
                     <ul class="nav">
     <li><a href="{{ url('index') }}">Home</a></li>
     <li><a href="{{ url('explore') }}">Explore</a></li>
-    @if(session('user'))
-        <!-- The user is logged in, show the logout button -->
+    @auth
+        <!-- Show when user is logged in -->
         <li>
-            <form method="POST" action="{{ url('index') }}">
-                @csrf
-                <button type="submit">Logout</button>
-            </form>
+        <form method="POST" action="{{ url('/') }}">
+    @csrf
+    <button type="submit" style="background: none; border: none; padding: 0; color: black; text-decoration: none; cursor: pointer;">Logout</button>
+</form>
         </li>
-    @else
-        <!-- The user is not logged in, show the registration and login links -->
-        <li><a href="{{ url('author') }}">Register</a></li>
-        <li><a href="{{ url('create') }}">Login</a></li>
-    @endif
+    @endauth
+
+    @guest
+        <!-- Show when user is not logged in -->
+        <li><a href="{{ route('author.register') }}">Register</a></li>
+        <li><a href="{{ route('create.login') }}"class="active">Login</a></li>
+    @endguest
 </ul>
+
+
 
 
 
@@ -217,7 +221,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ url('create') }}">
+    <form method="POST" action="{{ route('create.login') }}">
         @csrf
 
       

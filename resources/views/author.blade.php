@@ -60,20 +60,24 @@
                     <ul class="nav">
     <li><a href="{{ url('index') }}">Home</a></li>
     <li><a href="{{ url('explore') }}">Explore</a></li>
-    @if(session('user'))
-       
+    @auth
+        <!-- Show when user is logged in -->
         <li>
-            <form method="POST" action="{{ url('index') }}">
-                @csrf
-                <button type="submit">Logout</button>
-            </form>
+        <form method="POST" action="{{ url('/') }}">
+    @csrf
+    <button type="submit" style="background: none; border: none; padding: 0; color: black; text-decoration: none; cursor: pointer;">Logout</button>
+</form>
         </li>
-    @else
-       
-        <li><a href="{{ url('author') }}">Register</a></li>
-        <li><a href="{{ url('create') }}">Login</a></li>
-    @endif
+    @endauth
+
+    @guest
+        <!-- Show when user is not logged in -->
+        <li><a href="{{ route('author.register') }}"class="active">Register</a></li>
+        <li><a href="{{ route('create.login') }}">Login</a></li>
+    @endguest
 </ul>
+
+
 
 
  
@@ -109,7 +113,7 @@
     <div style="text-align: center;">
         <h2>Admin Registration</h2>
 
-        <form method="POST" action="{{ url('author') }}" style="border: 3px solid #f1f1f1; width: 60%; margin: auto; margin-top: 10%; padding: 16px;">
+        <form method="POST" action="{{ route('author.register') }}" style="border: 3px solid #f1f1f1; width: 60%; margin: auto; margin-top: 10%; padding: 16px;">
             @csrf
 
             <div style="margin-bottom: 16px;">
@@ -127,10 +131,6 @@
                 <input type="password" name="password" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
             </div>
 
-            <div style="margin-bottom: 16px;">
-                <label for="role">Role</label>
-                <input type="text" name="role" value="admin" readonly style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;">
-            </div>
 
             <button type="submit" style="background-color: #aa048b; color: white; padding: 14px 20px; margin: 8px 0; border: none; cursor: pointer; width: 100%;">Register</button>
         </form>

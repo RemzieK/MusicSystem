@@ -19,7 +19,9 @@ use App\Http\Controllers\AdminAuthController;
 */
 
 
-Route::redirect('/', '/index');
+Route::get('/', function () {
+    return view('index');
+});
 
 Route::middleware([
     'auth:sanctum',
@@ -52,11 +54,16 @@ Route::get('/images/upload/{album_id}', [ImageController::class, 'uploadNew'])->
 
 Route::get('/images/create', [ImageController::class, 'create'])->name('images.create');
 Route::post('/images/store', [ImageController::class, 'store'])->name('images.store');
-Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register.form');
-Route::post('/admin/register', [AdminAuthController::class, 'register'])->name('admin.register');
 
-Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login.form');
-Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
+
+Route::get('/author', [AdminAuthController::class, 'showRegistrationForm'])->name('author');
+Route::post('/author', [AdminAuthController::class, 'register'])->name('author.register');
+
+Route::get('/create', [AdminAuthController::class, 'showLoginForm'])->name('create');
+Route::post('/create', [AdminAuthController::class, 'login'])->name('create.login');
+
+Route::post('/', [AdminAuthController::class, 'logout'])->name('logout');
+
 
 Route::resource('genres', GenreController::class);
 Route::resource('artists', ArtistController::class);
