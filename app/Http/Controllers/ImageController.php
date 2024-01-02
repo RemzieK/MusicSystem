@@ -11,11 +11,10 @@ class ImageController extends Controller
 {
     public function create()
     {
-      
         $albums = Album::all();
-
-        return view('images.create', compact('albums'));
+        return view('explore.create', compact('albums'));
     }
+    
 
     public function store(Request $request)
     {
@@ -35,6 +34,6 @@ class ImageController extends Controller
 
         $image->save();
 
-        return redirect()->route('albums.index')->with('success', 'Image uploaded successfully.');
+        return redirect()->route('explore')->with('success', 'Image uploaded successfully.');
     }
 }

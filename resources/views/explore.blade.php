@@ -168,13 +168,13 @@
     </div>
   </div>
 
-
-@extends('layouts.app')
-
+  @extends('layouts.app')
 @section('content')
-
+    @auth
+        Authenticated User: {{ Auth::user() }}
+        Is Admin: {{ Auth::user()->is_admin }}
+    @endauth
     <h1>Database Table</h1>
-
     <table style="border-collapse: collapse; width: 100%; border: 1px solid #ffffff;">
         <thead>
             <tr>
@@ -190,48 +190,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($data as $item)
-                <tr>
-                    <td style="border: 1px solid #ffffff;color: white;">{{ $item->artist->name }}</td>
-                    <td style="border: 1px solid #ffffff;color: white;">{{ $item->name }}</td>
-                    <td style="border: 1px solid #ffffff;color: white;">{{ $item->genre->name }}</td>
-                    <td style="border: 1px solid #ffffff;color: white;">
-                        @if($item->images->isNotEmpty())
-                            <img src="data:image/png;base64,{{ base64_encode($item->images->first()->image_data) }}" alt="Album Image" style="width: 50px; height: 50px;">
-                        @endif
-                    </td>
-                    @auth
-                        @if(Auth::user()->is_admin)
-                            <td style="border: 1px solid #ffffff;color: white;">
-                                <a href="{{ route('albums.edit', ['album' => $item->id]) }}">Edit</a>
-                                <form action="{{ route('albums.update', ['album' => $item->id]) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit">Update</button>
-                                </form>
-                                <form action="{{ route('albums.destroy', ['album' => $item->id]) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Delete</button>
-                                </form>
-                                <form action="{{ route('images.upload', ['album_id' => $item->id]) }}" method="POST" enctype="multipart/form-data" style="display: inline;">
-                                    @csrf
-                                    <input type="file" name="image">
-                                    <button type="submit">Upload Image</button>
-                                </form>
-                            </td>
-                        @endif
-                    @endauth
-                </tr>
-            @endforeach
             @auth
                 @if(Auth::user()->is_admin)
                     <tr>
-                        <form action="{{ route('albums.store') }}" method="POST">
+                        <form action="{{ route('crud.action') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <td><input type="text" name="artist"></td>
-                            <td><input type="text" name="album"></td>
-                            <td><input type="text" name="genre"></td>
+                            <input type="hidden" name="model" value="albums">
+                            <input type="hidden" name="action" value="create">
+                            <td><input type="text" name="artist_name" placeholder="Artist Name"></td>
+                            <td><input type="text" name="album_name" placeholder="Album Name"></td>
+                            <td><input type="text" name="genre" placeholder="Genre"></td>
                             <td><input type="file" name="image"></td>
                             <td>
                                 <button type="submit">Create</button>
@@ -240,10 +208,76 @@
                     </tr>
                 @endif
             @endauth
+            @foreach($data as $album)
+                <tr>
+                    <form action="{{ route('crud.action') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="model" value="albums">
+                        <input type="hidden" name="action" value="edit">
+                        <input type="hidden" name="id" value="{{ $album->id }}">
+                        <td><input type="text" name="artist_name" value="{{ $album->artist->name }}" placeholder="Artist Name"></td>
+                        <td><input type="text" name="album_name" value="{{ $album->name }}" placeholder="Album Name"></td>
+                        <td><input type="text" name="genre" value="{{ $album->genre->name }}" placeholder="Genre"></td>
+                        <td><input type="file" name="image"></td>
+                        <td>
+                            <button type="submit">Update</button>
+                        </td>
+                    </form>
+                </tr>
+            @endforeach
+            @foreach($data as $album)
+    <tr>
+        <td>{{ $album->artist->name }}</td>
+        <td>{{ $album->name }}</td>
+        <td>{{ $album->genre->name }}</td>
+        <td>
+            @if($album->images->isNotEmpty())
+                @foreach($album->images as $image)
+                    <img src="{{ asset($image->image_path) }}" alt="Album Image" style="width: 50px; height: 50px;">
+                @endforeach
+            @endif
+        </td>
+        <td>
+            @auth
+                @if(Auth::user()->is_admin)
+                    <form action="{{ route('crud.action') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="model" value="albums">
+                        <input type="hidden" name="action" value="edit">
+                        <input type="hidden" name="id" value="{{ $album->id }}">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="{{ route('crud.action') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="model" value="albums">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="id" value="{{ $album->id }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                @endif
+            @endauth
+        </td>
+    </tr>
+@endforeach
+
+
+
         </tbody>
     </table>
-
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <div class="discover-items">
     <div class="container">

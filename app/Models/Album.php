@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Album extends Model
 {
-    protected $fillable = ['name', 'release_year', 'artist_id', 'genre_id'];
+    use HasFactory;
 
+    protected $table = 'albums';
+    protected $fillable = ['name', 'release_year', 'artist_id', 'genre_id'];
     public function artist()
     {
         return $this->belongsTo(Artist::class);
@@ -24,3 +26,4 @@ class Album extends Model
         return $this->hasMany(Image::class);
     }
 }
+
