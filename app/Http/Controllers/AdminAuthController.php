@@ -50,7 +50,7 @@ class AdminAuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('create');
+        return view('login');
     }
 
     public function login(Request $request)

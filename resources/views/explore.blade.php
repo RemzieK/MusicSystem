@@ -72,7 +72,7 @@
     @guest
         <!-- Show when user is not logged in -->
         <li><a href="{{ route('author.register') }}">Register</a></li>
-        <li><a href="{{ route('create.login') }}">Login</a></li>
+        <li><a href="{{ route('login') }}">Login</a></li>
     @endguest
 </ul>
 
@@ -169,102 +169,72 @@
   </div>
 
   @extends('layouts.app')
+
 @section('content')
-    @auth
-        Authenticated User: {{ Auth::user() }}
-        Is Admin: {{ Auth::user()->is_admin }}
-    @endauth
     <h1>Database Table</h1>
-    <table style="border-collapse: collapse; width: 100%; border: 1px solid #ffffff;">
+
+    <a href="{{ route('explore.create') }}">
+        <button type="button">Create</button>
+    </a>
+
+    <table style="border-collapse: collapse; width: 100%; border: 1px solid white;">
         <thead>
             <tr>
-                <th style="border: 1px solid #ffffff;color: white;">Artist</th>
-                <th style="border: 1px solid #ffffff;color: white;">Album</th>
-                <th style="border: 1px solid #ffffff;color: white;">Genre</th>
-                <th style="border: 1px solid #ffffff;color: white;">Image</th>
-                @auth
-                    @if(Auth::user()->is_admin)
-                        <th style="border: 1px solid #ffffff;color: white;">Actions</th>
-                    @endif
-                @endauth
+                <th style="border: 1px solid white; color: white;">Artist</th>
+                <th style="border: 1px solid white; color: white;">Album</th>
+                <th style="border: 1px solid white; color: white;">Genre</th>
+                <th style="border: 1px solid white; color: white;">Is Group</th>
+                <th style="border: 1px solid white; color: white;">Release Year</th>
+                <th style="border: 1px solid white; color: white;">Image</th>
+                <th style="border: 1px solid white; color: white;">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @auth
-                @if(Auth::user()->is_admin)
-                    <tr>
-                        <form action="{{ route('crud.action') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <input type="hidden" name="model" value="albums">
-                            <input type="hidden" name="action" value="create">
-                            <td><input type="text" name="artist_name" placeholder="Artist Name"></td>
-                            <td><input type="text" name="album_name" placeholder="Album Name"></td>
-                            <td><input type="text" name="genre" placeholder="Genre"></td>
-                            <td><input type="file" name="image"></td>
-                            <td>
-                                <button type="submit">Create</button>
-                            </td>
-                        </form>
-                    </tr>
-                @endif
-            @endauth
             @foreach($data as $album)
                 <tr>
-                    <form action="{{ route('crud.action') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="model" value="albums">
-                        <input type="hidden" name="action" value="edit">
-                        <input type="hidden" name="id" value="{{ $album->id }}">
-                        <td><input type="text" name="artist_name" value="{{ $album->artist->name }}" placeholder="Artist Name"></td>
-                        <td><input type="text" name="album_name" value="{{ $album->name }}" placeholder="Album Name"></td>
-                        <td><input type="text" name="genre" value="{{ $album->genre->name }}" placeholder="Genre"></td>
-                        <td><input type="file" name="image"></td>
-                        <td>
-                            <button type="submit">Update</button>
-                        </td>
-                    </form>
+                    <td style="color: white; border: 1px solid white;">{{ $album->artist->name }}</td>
+                    <td style="color: white; border: 1px solid white;">{{ $album->name }}</td>
+                    <td style="color: white; border: 1px solid white;">{{ $album->genre->name }}</td>
+                    <td style="color: white; border: 1px solid white;">{{ $album->is_group ? 'Yes' : 'No' }}</td>
+                    <td style="color: white; border: 1px solid white;">{{ $album->release_year }}</td>
+                    <td style="color: white; border: 1px solid white;">
+                       
+                    @if($album->images->isNotEmpty())
+    @foreach($album->images as $image)
+        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Album Image" style="width: 50px; height: 50px;">
+    @endforeach
+@endif
+
+<form action="{{ route('images.upload', $album->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="model" value="albums">
+    <input type="hidden" name="action" value="upload">
+    <input type="hidden" name="id" value="{{ $album->id }}">
+
+    <input type="file" name="image" id="image" style="color: white;">
+    <button type="submit" style=" border: 1px solid white;">Upload</button>
+</form>
+
+
+                   </td>
+                    <td style="color: white; border: 1px solid white;">
+                    <a href="{{ route('explore.edit', $album->id) }}">
+    <button type="button">Edit</button>
+</a>
+
+                        <form action="{{ route('explore.delete', $album->id) }}" method="POST">
+    @csrf
+    @method('DELETE')
+  <button type="submit" style=" border: 1px solid white;">Delete</button>
+</form>
+
+                    </td>
                 </tr>
             @endforeach
-            @foreach($data as $album)
-    <tr>
-        <td>{{ $album->artist->name }}</td>
-        <td>{{ $album->name }}</td>
-        <td>{{ $album->genre->name }}</td>
-        <td>
-            @if($album->images->isNotEmpty())
-                @foreach($album->images as $image)
-                    <img src="{{ asset($image->image_path) }}" alt="Album Image" style="width: 50px; height: 50px;">
-                @endforeach
-            @endif
-        </td>
-        <td>
-            @auth
-                @if(Auth::user()->is_admin)
-                    <form action="{{ route('crud.action') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="model" value="albums">
-                        <input type="hidden" name="action" value="edit">
-                        <input type="hidden" name="id" value="{{ $album->id }}">
-                        <button type="submit">Edit</button>
-                    </form>
-                    <form action="{{ route('crud.action') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="model" value="albums">
-                        <input type="hidden" name="action" value="delete">
-                        <input type="hidden" name="id" value="{{ $album->id }}">
-                        <button type="submit">Delete</button>
-                    </form>
-                @endif
-            @endauth
-        </td>
-    </tr>
-@endforeach
-
-
-
         </tbody>
     </table>
 @endsection
+
 
 
 

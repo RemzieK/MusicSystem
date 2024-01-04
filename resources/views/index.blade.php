@@ -72,7 +72,7 @@
     @guest
         <!-- Show when user is not logged in -->
         <li><a href="{{ route('author.register') }}">Register</a></li>
-        <li><a href="{{ route('create.login') }}">Login</a></li>
+        <li><a href="{{ route('login') }}">Login</a></li>
     @endguest
 </ul>
 
@@ -100,7 +100,7 @@
             <p>Dive into the pulsating universe of modern soundscapes, where rhythms and emotions converge in a dance of sonic innovation. From the digital whispers of synthesizers to the bold declarations of bass, this is more than music—it's an exploration of the contemporary heartbeat.</p>
             <div class="buttons">
               <div class="border-button">
-                <a href="explore.html">Explore</a>
+                <a href="explore">Explore</a>
               </div>
               
             </div>
@@ -220,7 +220,7 @@
                       <span class="collection">Sold Albums:<br><strong>2 million</strong></span>
                       <span class="category">Category:<br><strong>Italian pop</strong></span>
                       <div class="main-button">
-                        <a href="explore.html">Explore</a>
+                        <a href="explore">Explore</a>
                       </div>
                     </div>
                   </div>
@@ -231,7 +231,7 @@
                       <span class="collection">Sold Albums:<br><strong>34 million</strong></span>
                       <span class="category">Category:<br><strong>Pop</strong></span>
                       <div class="main-button">
-                        <a href="explore.html">Explore</a>
+                        <a href="explore">Explore</a>
                       </div>
                     </div>
                   </div>
@@ -242,7 +242,7 @@
                       <span class="collection">Sold Albums:<br><strong>12 millon</strong></span>
                       <span class="category">Category:<br><strong>Art rock</strong></span>
                       <div class="main-button">
-                        <a href="explore.html">Explore</a>
+                        <a href="explore">Explore</a>
                       </div>
                     </div>
                   </div>
@@ -253,7 +253,7 @@
                       <span class="collection">Sold Albums:<br><strong>4 million</strong></span>
                       <span class="category">Category:<br><strong>Dark pop</strong></span>
                       <div class="main-button">
-                        <a href="explore.html">Explore</a>
+                        <a href="explore">Explore</a>
                       </div>
                     </div>
                   </div>
@@ -277,7 +277,7 @@
         </div>
         <div class="col-lg-4">
           <div class="main-button">
-            <a href="create.html">AdminPanel</a>
+            <a href="create">AdminPanel</a>
           </div>
         </div>
         <div class="col-lg-4">

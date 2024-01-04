@@ -1,11 +1,8 @@
 
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
-
-
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
 
     <meta charset="utf-8">
@@ -28,10 +25,7 @@
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
   </head>
-
 <body>
-
-  <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
       <span class="dot"></span>
@@ -42,25 +36,19 @@
       </div>
     </div>
   </div>
-  <!-- ***** Preloader End ***** -->
-
   <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
                         <img src="assets/images/logo.png" alt="">
                     </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
                     <ul class="nav">
     <li><a href="{{ url('index') }}">Home</a></li>
     <li><a href="{{ url('explore') }}">Explore</a></li>
     @auth
-        <!-- Show when user is logged in -->
         <li>
         <form method="POST" action="{{ url('/') }}">
     @csrf
@@ -70,16 +58,10 @@
     @endauth
 
     @guest
-        <!-- Show when user is not logged in -->
         <li><a href="{{ route('author.register') }}">Register</a></li>
-        <li><a href="{{ route('create.login') }}"class="active">Login</a></li>
+        <li><a href="{{ route('login') }}"class="active">Login</a></li>
     @endguest
 </ul>
-
-
-
-
-
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -90,27 +72,25 @@
     </div>
   </header>
   <!-- ***** Header Area End ***** -->
-
   <div class="page-heading normal-space">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h6>Liberty NFT Market</h6>
-          <h2>Create Your NFT Now.</h2>
-          <span>Home > <a href="#">Create Yours</a></span>
+          <h6>Welcome back!</h6>
+          <h2>Login into your account</h2>
+          <span>Home > <a href="#">Login</a></span>
           <div class="buttons">
             <div class="main-button">
-              <a href="explore.html">Explore Our Items</a>
+              <a href="explore">Explore</a>
             </div>
             <div class="border-button">
-              <a href="create.html">Create Your NFT</a>
+              <a href="author">Register</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
   <div class="item-details-page">
     <div class="container">
       <div class="row">
@@ -221,7 +201,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('create.login') }}">
+    <form method="POST" action="{{ route('login') }}">
         @csrf
 
       

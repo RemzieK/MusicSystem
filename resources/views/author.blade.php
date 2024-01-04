@@ -1,25 +1,18 @@
 
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-
     <meta charset="utf-8">
     <meta name="author" content="templatemo">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
     <title>MusicSystem</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css">
@@ -29,9 +22,7 @@
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
   </head>
-
 <body>
-
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
@@ -51,47 +42,34 @@
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
                         <img src="assets/images/logo.png" alt="">
                     </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-    <li><a href="{{ url('index') }}">Home</a></li>
-    <li><a href="{{ url('explore') }}">Explore</a></li>
-    @auth
-        <!-- Show when user is logged in -->
-        <li>
-        <form method="POST" action="{{ url('/') }}">
-    @csrf
-    <button type="submit" style="background: none; border: none; padding: 0; color: black; text-decoration: none; cursor: pointer;">Logout</button>
-</form>
-        </li>
+                    <li><a href="{{ url('index') }}">Home</a></li>
+                    <li><a href="{{ url('explore') }}">Explore</a></li>
+                @auth
+            <li>
+                <form method="POST" action="{{ url('/') }}">
+                 @csrf
+                <button type="submit" style="background: none; border: none; padding: 0; color: black; text-decoration: none; cursor: pointer;">Logout</button>
+                </form>
+            </li>
     @endauth
-
     @guest
-        <!-- Show when user is not logged in -->
         <li><a href="{{ route('author.register') }}"class="active">Register</a></li>
-        <li><a href="{{ route('create.login') }}">Login</a></li>
+        <li><a href="{{ route('login') }}">Login</a></li>
     @endguest
 </ul>
-
-
-
-
- 
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
+          <a class='menu-trigger'>
+             <span>Menu</span>
+          </a>
                 </nav>
             </div>
         </div>
     </div>
   </header>
   <!-- ***** Header Area End ***** -->
-
   <div class="page-heading normal-space">
     <div class="container">
       <div class="row">
@@ -101,57 +79,38 @@
           <span>Home > <a href="#">AdminPanel</a></span>
           <div class="buttons">
             <div class="main-button">
-              <a href="explore.html">Explore</a>
+              <a href="explore">Explore</a>
             </div>
             <div class="border-button">
-              <a href="create.html">?</a>
-
-
+              <a href="create">Login</a>
 @extends('layouts.app')
-
 @section('content')
     <div style="text-align: center;">
         <h2>Admin Registration</h2>
-
         <form method="POST" action="{{ route('author.register') }}" style="border: 3px solid #f1f1f1; width: 60%; margin: auto; margin-top: 10%; padding: 16px;">
             @csrf
-
             <div style="margin-bottom: 16px;">
                 <label for="name">Name</label>
                 <input type="text" name="name" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
             </div>
-
             <div style="margin-bottom: 16px;">
                 <label for="email">Email</label>
                 <input type="email" name="email" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
             </div>
-
             <div style="margin-bottom: 16px;">
                 <label for="password">Password</label>
                 <input type="password" name="password" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
             </div>
-
-
             <button type="submit" style="background-color: #aa048b; color: white; padding: 14px 20px; margin: 8px 0; border: none; cursor: pointer; width: 100%;">Register</button>
         </form>
     </div>
 @endsection
-
-
-
-
-
-
-
-
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
-
   <div class="create-nft">
     <div class="container">
       <div class="row">
@@ -163,7 +122,7 @@
         </div>
         <div class="col-lg-4">
           <div class="main-button">
-            <a href="explore.html">Explore</a>
+            <a href="explore">Explore</a>
           </div>
         </div>
         <div class="col-lg-4">
@@ -202,10 +161,6 @@
       </div>
     </div>
   </div>
-
-
-
-
 
   <footer>
     <div class="container">

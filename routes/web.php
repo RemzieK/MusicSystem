@@ -38,8 +38,8 @@ Route::get('/author', function () {
     return view('author');
 });
 
-Route::get('/create', function () {
-    return view('create');
+Route::get('/login', function () {
+    return view('login');
 });
 
 Route::get('/explore', [ExploreController::class, 'index'])->name('explore');
@@ -60,20 +60,26 @@ Route::post('/images/upload/{album_id}', [ImageController::class, 'store'])->nam
 Route::get('/author', [AdminAuthController::class, 'showRegistrationForm'])->name('author');
 Route::post('/author', [AdminAuthController::class, 'register'])->name('author.register');
 
-Route::get('/create', [AdminAuthController::class, 'showLoginForm'])->name('create');
-Route::post('/create', [AdminAuthController::class, 'login'])->name('create.login');
+Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AdminAuthController::class, 'login'])->name('login');
 
 Route::post('/', [AdminAuthController::class, 'logout'])->name('logout');
 
-Route::post('/crud/action', [CrudController::class, 'action'])->name('crud.action');
 
 
-Route::get('/explore', [ExploreController::class, 'index'])->name('explore.index');
+Route::get('/explore', [ExploreController::class, 'index'])->name('explore');
 Route::get('/explore/create', [ExploreController::class, 'create'])->name('explore.create');
+
+Route::get('/create', [ExploreController::class,'create'])->name('explore.create');
 Route::post('/explore', [ExploreController::class, 'store'])->name('explore.store');
-Route::get('/explore/edit/{id}', [ExploreController::class, 'edit'])->name('explore.edit');
+
+Route::get('explore/edit/{id}', [ExploreController::class, 'edit'])->name('explore.edit');
+Route::put('/explore/{id}', [ExploreController::class, 'update'])->name('explore.update');
 Route::put('/explore/update/{id}', [ExploreController::class, 'update'])->name('explore.update');
+
 Route::delete('/explore/delete/{id}', [ExploreController::class, 'delete'])->name('explore.delete');
+
+
 
 
 Route::resource('genres', GenreController::class);
