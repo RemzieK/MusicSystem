@@ -1,6 +1,6 @@
-
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -69,7 +69,10 @@
         </div>
     </div>
   </header>
+  
   <!-- ***** Header Area End ***** -->
+  @extends('layouts.app')
+@section('content')
   <div class="page-heading normal-space">
     <div class="container">
       <div class="row">
@@ -83,96 +86,35 @@
             </div>
             <div class="border-button">
               <a href="create">Login</a>
-@extends('layouts.app')
-@section('content')
+             </div>
+             </div>
     <div style="text-align: center;">
-        <h2>Admin Registration</h2>
-        <form method="POST" action="{{ route('author.register') }}" style="border: 3px solid #f1f1f1; width: 60%; margin: auto; margin-top: 10%; padding: 16px;">
+       
+        <form method="POST" action="{{ route('author.register') }}" style="border: 3px solid #f1f1f1; width: 60%; margin: auto; margin-top: 1%; padding: 16px;">
             @csrf
             <div style="margin-bottom: 16px;">
-                <label for="name">Name</label>
+                <label for="name" style="color:white;">Name</label>
                 <input type="text" name="name" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
             </div>
             <div style="margin-bottom: 16px;">
-                <label for="email">Email</label>
+                <label for="email"style="color:white;">Email</label>
                 <input type="email" name="email" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
             </div>
             <div style="margin-bottom: 16px;">
-                <label for="password">Password</label>
+                <label for="password"style="color:white;">Password</label>
                 <input type="password" name="password" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
             </div>
             <button type="submit" style="background-color: #aa048b; color: white; padding: 14px 20px; margin: 8px 0; border: none; cursor: pointer; width: 100%;">Register</button>
         </form>
     </div>
-@endsection
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="create-nft">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8">
-          <div class="section-heading">
-            <div class="line-dec"></div>
-            <h2>Become admin so you too can add the new hits!</h2>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="main-button">
-            <a href="explore">Explore</a>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="item first-item">
-            <div class="number">
-              <h6>1</h6>
-            </div>
-            <div class="icon">
-              <img src="assets/images/icon-02.png" alt="">
-            </div>
-            <h4>Set Up Your Profile</h4>
-            <p>Just add little information about yourself and whitin seconds you'll have the power to change everything!</p>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="item second-item">
-            <div class="number">
-              <h6>2</h6>
-            </div>
-            <div class="icon">
-              <img src="assets/images/icon-04.png" alt="">
-            </div>
-            <h4>Check for new/ non added records!</h4>
-            <p>Check to see if your database is missing something and fill it up, now the power is in your hands!</p>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="item">
-            <div class="icon">
-              <img src="assets/images/icon-06.png" alt="">
-            </div>
-            <h4>Create, Update, Delete, Edit</h4>
-            <p>By our user friendly interface you can create new records, update the ones left in the past, edit if you found a mistake and delete a record you don't think that should be there.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Copyright © 2022 <a href="#">Liberty</a> NFT Marketplace Co., Ltd. All rights reserved.
-          &nbsp;&nbsp;
-          Designed by <a title="HTML CSS Templates" rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+           
+          
         </div>
       </div>
     </div>
-  </footer>
+  </div>
+ @endsection
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->

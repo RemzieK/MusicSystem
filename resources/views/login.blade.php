@@ -91,144 +91,51 @@
       </div>
     </div>
   </div>
+  @extends('layouts.app')
+
+@section('content')
   <div class="item-details-page">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="section-heading">
             <div class="line-dec"></div>
-            <h2>Apply For <em>Your Item</em> Here.</h2>
+            <h2>Admin <em>login</em> Here.</h2>
           </div>
         </div>
-        <div class="col-lg-12">
-          <form id="contact" action="" method="post">
-            <div class="row">
-              <div class="col-lg-4">
-                <fieldset>
-                  <label for="title">Item Title</label>
-                  <input type="title" name="title" id="title" placeholder="Ex. Lyon King" autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-4">
-                <fieldset>
-                  <label for="description">Description For Item</label>
-                  <input type="description" name="description" id="description" placeholder="Give us your idea" autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-4">
-                <fieldset>
-                  <label for="username">Your Username</label>
-                  <input type="username" name="username" id="username" placeholder="Ex. @alansmithee" autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <label for="price">Price Of Item</label>
-                  <input type="price" name="price" id="price" placeholder="Price depends on quality. Ex. 0.06 ETH" autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <label for="royalities">Royalties</label>
-                  <input type="royalities" name="royalities" id="royalities" placeholder="Common royalties 1-25%" autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-4">
-                <fieldset>
-                  <label for="file">Your File</label>
-                  <input type="file" id="file" name="myfiles[]" multiple />
-                </fieldset>
-              </div>
-              <div class="col-lg-8">
-                <fieldset>
-                  <button type="submit" id="form-submit" class="orange-button">Submit Your Applying</button>
-                </fieldset>
-              </div>
+       
+     
+
+
+<div style="text-align: center;">
+       
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
-          </form>
-        </div>
-        <div class="col-lg-12">
-          <div class="section-heading">
-            <div class="line-dec"></div>
-            <h2>This Is <em>Your Item</em> Preview.</h2>
-          </div>
-        </div>
-        <div class="col-lg-7">
-          <div class="left-image">
-            <img src="assets/images/create-yours.jpg" alt="" style="border-radius: 20px;">
-          </div>
-        </div>
-        <div class="col-lg-5 align-self-center">
-          <h4>Dolores Haze Westworld Eye</h4>
-          <span class="author">
-            <img src="assets/images/author-02.jpg" alt="" style="max-width: 50px; border-radius: 50%;">
-            <h6>Kataleya Smithee<br><a href="#">@kataleey</a></h6>
-          </span>
-          <p>Lorem ipsum dolor sit amet, consectetu dipiscingei elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <div class="row">
-            <div class="col-3">
-              <span class="bid">
-                Current Bid<br><strong>0.06 ETH</strong><br><em>($8055,35)</em>
-              </span>
+        @endif
+        <form method="POST" action="{{ route('login') }}" style="border: 3px solid #f1f1f1; width: 60%; margin: auto; margin-top: 1%; padding: 16px;">
+            @csrf
+            <div style="margin-bottom: 16px;">
+                <label for="email" style="color:white">Email</label>
+                <input type="email" name="email" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
             </div>
-            <div class="col-4">
-              <span class="owner">
-                Owner<br><strong>Alan Smithee</strong><br><em>(@asmithee)</em>
-              </span>
+            <div style="margin-bottom: 16px;">
+                <label for="password"style="color:white">Password</label>
+                <input type="password" name="password" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
             </div>
-            <div class="col-5">
-              <span class="ends">
-                Ends In<br><strong>3D 05H 20M 58S</strong><br><em>(January 22nd, 2021)</em>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+            <button type="submit" style="background-color: #aa048b; color: white; padding: 14px 20px; margin: 8px 0; border: none; cursor: pointer; width: 100%;">Login</button>
+        </form>
+    </div>
+    </div>
     </div>
   </div>
 
-
-
-@extends('layouts.app')
-
-@section('content')
-    <h2>Admin Login</h2>
-
-   
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-      
-        <label for="email">Email</label>
-        <input type="email" name="email" required>
-
-        <label for="password">Password</label>
-        <input type="password" name="password" required>
-
-        <button type="submit">Login</button>
-    </form>
 @endsection
 
 
 
 
-
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Copyright © 2022 <a href="#">Liberty</a> NFT Marketplace Co., Ltd. All rights reserved.
-        
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->

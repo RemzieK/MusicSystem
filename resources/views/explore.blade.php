@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
 
@@ -168,11 +167,20 @@
     </div>
   </div>
 
+  <div class="discover-items">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="section-heading">
+            <div class="line-dec"></div>
+            <h2>Discover more with our <em>Database</em>.</h2>
+          </div>
+        </div>
+       
   @extends('layouts.app')
 
 @section('content')
-    <h1>Database Table</h1>
-
+   
     <a href="{{ route('explore.create') }}">
         <button type="button">Create</button>
     </a>
@@ -211,9 +219,11 @@
     <input type="hidden" name="action" value="upload">
     <input type="hidden" name="id" value="{{ $album->id }}">
 
-    <input type="file" name="image" id="image" style="color: white;">
+    <input type="file" name="image" id="image" style="color: white;" onchange="document.getElementById('preview').style.display = 'block'; readURL(this);">
+    <img id="preview" src="#" alt="your image" style="width: 50px; height: 50px; display: none;"/>
     <button type="submit" style=" border: 1px solid white;">Upload</button>
 </form>
+
 
 
                    </td>
@@ -249,29 +259,8 @@
 
 
 
-  <div class="discover-items">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-5">
-          <div class="section-heading">
-            <div class="line-dec"></div>
-            <h2>Discover more with our <em>Database</em>.</h2>
-          </div>
-        </div>
-       
 
 
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Copyright © 2022 <a href="#">Liberty</a> NFT Marketplace Co., Ltd. All rights reserved.
-          &nbsp;&nbsp;
-          Designed by <a title="HTML CSS Templates" rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->

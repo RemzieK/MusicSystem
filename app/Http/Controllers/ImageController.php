@@ -20,28 +20,29 @@ class ImageController extends Controller
         $album = Album::findOrFail($album_id);
         return view('upload-new', compact('album')); // You can replace 'upload-new' with your actual view name
     }
-    public function store(Request $request)
+    public function store(Request $request, $album_id)
 {
     $request->validate([
-        'album_id' => 'required|exists:albums,id',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
 
-    $album = Album::findOrFail($request->album_id);
+    $imageName = time().'.'.$request->image->extension();  
+    $imageData = file_get_contents($request->file('image')); // Get contents before moving the file
 
-    // Store the image in the 'public/images' directory and get the path
-    $path = $request->file('image')->storeAs('images', $request->file('image')->getClientOriginalName(), 'public');
+    $request->image->move(public_path('images'), $imageName);
 
-
-    $image = new Image([
-        'album_id' => $album->id,
-        'image_path' => $path,  // Save the path of the image
-    ]);
-    
+    $image = new Image;
+    $image->album_id = $album_id;
+    $image->image_path = $imageName;
+    $image->image_data = $imageData; // Use the retrieved contents
     $image->save();
-    
 
-    return redirect()->route('explore')->with('success', 'Image uploaded successfully.');
+    return back()
+        ->with('success','Image uploaded successfully.')
+        ->with('image',$imageName);
 }
+
+
+    
 
 }

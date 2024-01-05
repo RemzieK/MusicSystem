@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
 

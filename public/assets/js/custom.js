@@ -145,6 +145,36 @@
 	}
 
 
+//image upload
+window.onload = function() {
+    var imageInput = document.getElementById('image');
+    if(imageInput) {
+        imageInput.onchange = function() {
+            document.getElementById('preview').style.display = 'block';
+            readURL(this);
+        }
+    }
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            document.getElementById('preview').src = e.target.result;
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+
+
+
+
+
+
 	// Menu elevator animation
 	$('.scroll-to-section a[href*=\\#]:not([href=\\#])').on('click', function() {
 		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
