@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    
     public function up()
-{
-    Schema::table('images', function (Blueprint $table) {
-        $table->string('image_path');
-    });
-}
+    {
+        Schema::table('images', function (Blueprint $table) {
+            $table->mediumBlob('image_data')->change();
+        });
+    }
+    
+    
 
 
-    /**
-     * Reverse the migrations.
-     */
+
+    
     public function down()
     {
         Schema::table('images', function (Blueprint $table) {

@@ -7,20 +7,6 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CrudController;
 
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-
 Route::get('/', function () {
     return view('index');
 });
@@ -48,12 +34,14 @@ Route::get('/index', function () {
     return view('index');
 });
 
-
 Route::get('/images/change/{album_id}', [ImageController::class, 'change'])->name('images.change');
 Route::get('/images/delete/{album_id}', [ImageController::class, 'delete'])->name('images.delete');
 Route::get('/images/upload/{album_id}', [ImageController::class, 'uploadNew'])->name('images.upload');
 Route::get('/images/create', [ImageController::class, 'create'])->name('images.create');
 Route::post('/images/upload/{album_id}', [ImageController::class, 'store'])->name('images.upload');
+
+Route::get('/album/{id}', [ImageController::class, 'showAlbum'])->name('album.show');
+Route::get('/image/{id}', [ImageController::class, 'showImage'])->name('image.show');
 
 
 
@@ -64,8 +52,6 @@ Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login
 Route::post('/login', [AdminAuthController::class, 'login'])->name('login');
 
 Route::post('/', [AdminAuthController::class, 'logout'])->name('logout');
-
-
 
 Route::get('/explore', [ExploreController::class, 'index'])->name('explore');
 Route::get('/explore/create', [ExploreController::class, 'create'])->name('explore.create');

@@ -22,7 +22,6 @@ public function genre()
     return $this->belongsTo(Genre::class, 'genre_id');
 }
 
-
     public function images()
     {
         return $this->hasMany(Image::class);

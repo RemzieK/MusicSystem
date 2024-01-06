@@ -1,10 +1,8 @@
-
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <meta charset="utf-8">
     <meta name="author" content="templatemo">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +21,6 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-
   </head>
 <body>
   <div id="js-preloader" class="js-preloader">
@@ -92,7 +89,6 @@
     </div>
   </div>
   @extends('layouts.app')
-
 @section('content')
   <div class="item-details-page">
     <div class="container">
@@ -103,12 +99,7 @@
             <h2>Admin <em>login</em> Here.</h2>
           </div>
         </div>
-       
-     
-
-
 <div style="text-align: center;">
-       
         @if(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -130,13 +121,7 @@
     </div>
     </div>
   </div>
-
 @endsection
-
-
-
-
-
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>

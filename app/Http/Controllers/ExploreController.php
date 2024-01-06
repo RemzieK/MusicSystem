@@ -10,9 +10,6 @@ use App\Models\Artist;
 use App\Models\Album;
 use Illuminate\Support\Facades\Auth;
 
-
-
-
 class ExploreController extends Controller
 {
     public function index()
@@ -76,10 +73,6 @@ public function handleCrud(Request $request)
     return redirect()->route('explore');  
 }
 
-
-    
-    
-
 public function create()
 {
     return view('crudViews.create');
@@ -92,13 +85,14 @@ public function edit($id)
     return view('crudViews.edit', compact('record'));
 }
 
-
 public function update(Request $request, $id)
 {
     $request->validate([
         'album_name' => 'required|max:255',
         'artist_name' => 'required|max:255',
         'genre' => 'required|max:255',
+        'release_year' => 'required|integer|min:1900|max:' . date('Y'),
+        'is_group' => 'required|boolean',
     ]);
 
     $album = Album::find($id);
@@ -106,16 +100,13 @@ public function update(Request $request, $id)
     $album->release_year = $request->release_year;
     $album->is_group = $request->is_group;
 
-    // Update the name field of the related Artist and Genre models
     $album->artist->name = $request->artist_name;
     $album->genre->name = $request->genre;
 
-    $album->push();  // This will save the Album model and all its related models
+    $album->push();
 
     return redirect()->route('explore');
 }
-
-
 
     public function delete($id)
     {

@@ -69,7 +69,6 @@
         </div>
     </div>
   </header>
-  
   <!-- ***** Header Area End ***** -->
   @extends('layouts.app')
 @section('content')
@@ -89,27 +88,32 @@
              </div>
              </div>
     <div style="text-align: center;">
-       
-        <form method="POST" action="{{ route('author.register') }}" style="border: 3px solid #f1f1f1; width: 60%; margin: auto; margin-top: 1%; padding: 16px;">
-            @csrf
-            <div style="margin-bottom: 16px;">
-                <label for="name" style="color:white;">Name</label>
-                <input type="text" name="name" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
-            </div>
-            <div style="margin-bottom: 16px;">
-                <label for="email"style="color:white;">Email</label>
-                <input type="email" name="email" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
-            </div>
-            <div style="margin-bottom: 16px;">
-                <label for="password"style="color:white;">Password</label>
-                <input type="password" name="password" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
-            </div>
-            <button type="submit" style="background-color: #aa048b; color: white; padding: 14px 20px; margin: 8px 0; border: none; cursor: pointer; width: 100%;">Register</button>
-        </form>
+    <form method="POST" action="{{ route('author.register') }}" style="border: 3px solid #f1f1f1; width: 60%; margin: auto; margin-top: 1%; padding: 16px;">
+    @csrf
+    @if(session('error'))
+        <div style="color: red; margin-bottom: 16px;">{{ session('error') }}</div>
+    @endif
+    <div style="margin-bottom: 16px;">
+        <label for="name" style="color:white;">Name</label>
+        <input type="text" name="name" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
     </div>
-
-           
-          
+    <div style="margin-bottom: 16px;">
+        <label for="email" style="color:white;">Email</label>
+        <input type="email" name="email" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
+        @if ($errors->has('email'))
+            <div style="color: red;">{{ $errors->first('email') }}</div>
+        @endif
+    </div>
+    <div style="margin-bottom: 16px;">
+        <label for="password" style="color:white;">Password</label>
+        <input type="password" name="password" style="width: 50%; padding: 10px 15px; margin: 6px 0; display: inline-block; border: 3px solid #ccc; box-sizing: border-box;" required>
+        @if ($errors->has('password'))
+            <div style="color: red;">{{ $errors->first('password') }}</div>
+        @endif
+    </div>
+    <button type="submit" style="background-color: #aa048b; color: white; padding: 14px 20px; margin: 8px 0; border: none; cursor: pointer; width: 100%;">Register</button>
+</form>
+    </div>
         </div>
       </div>
     </div>

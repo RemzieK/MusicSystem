@@ -1,7 +1,5 @@
 <link rel="stylesheet" href="{{ asset('css/template.css') }}">
 <script src="{{ asset('js/template.js') }}"></script>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +40,6 @@
     </div>
   </div>
   <!-- ***** Preloader End ***** -->
-
   <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky">
     <div class="container">
@@ -74,10 +71,6 @@
         <li><a href="{{ route('login') }}">Login</a></li>
     @endguest
 </ul>
-
-
-
-
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -88,7 +81,6 @@
     </div>
   </header>
   <!-- ***** Header Area End ***** -->
-
   <div class="page-heading">
     <div class="container">
       <div class="row">
@@ -111,7 +103,6 @@
                     <div class="content">
                       <h4>Daisy 2.0</h4>
                       <span class="author">
-                        
                         <h6>Artist:<br><a href="#">Ashnikko</a></h6>
                       </span>
                     </div>
@@ -125,7 +116,6 @@
                     <div class="content">
                       <h4>Thrill Seeker</h4>
                       <span class="author">
-                        
                         <h6>Artist:<br><a href="#">Sub Urban</a></h6>
                       </span>
                     </div>
@@ -139,7 +129,6 @@
                     <div class="content">
                       <h4>Fever Dream</h4>
                       <span class="author">
-                       
                         <h6>Artist:<br><a href="#">Palaye Royale</a></h6>
                       </span>
                     </div>
@@ -153,7 +142,6 @@
                     <div class="content">
                       <h4>W.D.Y.M</h4>
                       <span class="author">
-                        
                         <h6>Artist<br><a href="#">5SOS</a></h6>
                       </span>
                     </div>
@@ -166,7 +154,6 @@
       </div>
     </div>
   </div>
-
   <div class="discover-items">
     <div class="container">
       <div class="row">
@@ -176,15 +163,13 @@
             <h2>Discover more with our <em>Database</em>.</h2>
           </div>
         </div>
-       
   @extends('layouts.app')
-
 @section('content')
-   
+@if(Auth::check())
     <a href="{{ route('explore.create') }}">
         <button type="button">Create</button>
     </a>
-
+    @endif
     <table style="border-collapse: collapse; width: 100%; border: 1px solid white;">
         <thead>
             <tr>
@@ -206,13 +191,14 @@
                     <td style="color: white; border: 1px solid white;">{{ $album->is_group ? 'Yes' : 'No' }}</td>
                     <td style="color: white; border: 1px solid white;">{{ $album->release_year }}</td>
                     <td style="color: white; border: 1px solid white;">
-                       
+@if(Auth::check())
                     @if($album->images->isNotEmpty())
-    @foreach($album->images as $image)
-        <img src="{{ asset('storage/' . $image->image_path) }}" alt="Album Image" style="width: 50px; height: 50px;">
-    @endforeach
-@endif
+                    @foreach($album->images as $image)
+                    <img src="{{ asset('images/' . $image->image_path) }}" alt="Album Image" style="width: 70px; height: 70px;">
 
+                    
+                    @endforeach
+                    @endif
 <form action="{{ route('images.upload', $album->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="model" value="albums">
@@ -223,20 +209,20 @@
     <img id="preview" src="#" alt="your image" style="width: 50px; height: 50px; display: none;"/>
     <button type="submit" style=" border: 1px solid white;">Upload</button>
 </form>
-
-
-
                    </td>
                     <td style="color: white; border: 1px solid white;">
-                    <a href="{{ route('explore.edit', $album->id) }}">
-    <button type="button">Edit</button>
-</a>
 
-                        <form action="{{ route('explore.delete', $album->id) }}" method="POST">
+                    <a href="{{ route('explore.edit', $album->id) }}">
+                     <button type="button">Edit</button>
+                    </a>
+
+
+<form action="{{ route('explore.delete', $album->id) }}" method="POST">
     @csrf
     @method('DELETE')
-  <button type="submit" style=" border: 1px solid white;">Delete</button>
+    <button type="submit" style=" border: 1px solid white;">Delete</button>
 </form>
+@endif
 
                     </td>
                 </tr>
@@ -244,24 +230,6 @@
         </tbody>
     </table>
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -273,6 +241,5 @@
   <script src="assets/js/tabs.js"></script>
   <script src="assets/js/popup.js"></script>
   <script src="assets/js/custom.js"></script>
-
   </body>
 </html>
