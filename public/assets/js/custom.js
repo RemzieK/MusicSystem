@@ -131,11 +131,6 @@
 			}
 		}
 	})
-
-	
-	
-	
-
 	// Menu Dropdown Toggle
 	if($('.menu-trigger').length){
 		$(".menu-trigger").on('click', function() {	
@@ -143,8 +138,6 @@
 			$('.header-area .nav').slideToggle(200);
 		});
 	}
-
-
 //image upload
 window.onload = function() {
     var imageInput = document.getElementById('image');
@@ -167,14 +160,6 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-
-
-
-
-
-
-
 	// Menu elevator animation
 	$('.scroll-to-section a[href*=\\#]:not([href=\\#])').on('click', function() {
 		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -233,8 +218,6 @@ function readURL(input) {
 	        }
 	    });
 	}
-
-
 	// Page loading animation
 	$(window).on('load', function() {
 		if($('.cover').length){
@@ -253,45 +236,7 @@ function readURL(input) {
 		});
 	});
 
-	
-
 	const dropdownOpener = $('.main-nav ul.nav .has-sub > a');
-
-    // Open/Close Submenus
-    if (dropdownOpener.length) {
-        dropdownOpener.each(function () {
-            var _this = $(this);
-
-            _this.on('tap click', function (e) {
-                var thisItemParent = _this.parent('li'),
-                    thisItemParentSiblingsWithDrop = thisItemParent.siblings('.has-sub');
-
-                if (thisItemParent.hasClass('has-sub')) {
-                    var submenu = thisItemParent.find('> ul.sub-menu');
-
-                    if (submenu.is(':visible')) {
-                        submenu.slideUp(450, 'easeInOutQuad');
-                        thisItemParent.removeClass('is-open-sub');
-                    } else {
-                        thisItemParent.addClass('is-open-sub');
-
-                        if (thisItemParentSiblingsWithDrop.length === 0) {
-                            thisItemParent.find('.sub-menu').slideUp(400, 'easeInOutQuad', function () {
-                                submenu.slideDown(250, 'easeInOutQuad');
-                            });
-                        } else {
-                            thisItemParent.siblings().removeClass('is-open-sub').find('.sub-menu').slideUp(250, 'easeInOutQuad', function () {
-                                submenu.slideDown(250, 'easeInOutQuad');
-                            });
-                        }
-                    }
-                }
-
-                e.preventDefault();
-            });
-        });
-    }
-
 
 	
 

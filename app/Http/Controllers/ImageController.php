@@ -28,16 +28,21 @@ class ImageController extends Controller
     
         $album = Album::findOrFail($album_id);
     
-        $imagePath = $request->file('image')->store('images');
+        // Get the original image file name
+        $originalFileName = time().'.'.$request->image->extension();  
+    
+        // Move the image to the public/images directory
+        $request->image->move(public_path('images'), $originalFileName);
     
         $image = new Image;
         $image->album_id = $album_id;
-        $image->image_path = $imagePath;
+        $image->image_path = 'images/'.$originalFileName;
         $image->save();
     
         return redirect()->route('explore'); 
     }
     
+
 
 
 

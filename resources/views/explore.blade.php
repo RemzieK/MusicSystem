@@ -191,14 +191,18 @@
                     <td style="color: white; border: 1px solid white;">{{ $album->is_group ? 'Yes' : 'No' }}</td>
                     <td style="color: white; border: 1px solid white;">{{ $album->release_year }}</td>
                     <td style="color: white; border: 1px solid white;">
-@if(Auth::check())
+
                     @if($album->images->isNotEmpty())
                     @foreach($album->images as $image)
-                    <img src="{{ asset('images/' . $image->image_path) }}" alt="Album Image" style="width: 70px; height: 70px;">
+
+                    <img src="{{ asset($image->image_path) }}" alt="Album Image" style="width: 100px; height: 90px;">
+
+
 
                     
                     @endforeach
                     @endif
+                    @if(Auth::check())
 <form action="{{ route('images.upload', $album->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="model" value="albums">
