@@ -21,32 +21,6 @@ class ExploreController extends Controller
     return view('explore', compact('data', 'isAdmin'));
 }
 
-public function handleCrud(Request $request)
-    {
-        $isAdmin = auth()->user() ? auth()->user()->is_admin : false;
-
-        if (!$isAdmin) {
-            abort(403, 'Unauthorized action.');
-        }
-
-        $model = $request->input('model');
-        $action = $request->input('action');
-        $id = $request->input('id');
-
-        switch ($action) {
-            case 'edit':
-                return $this->edit($request, $id);
-            case 'update':
-                return $this->update($request, $id);
-            case 'delete':
-                return $this->delete($id);
-            case 'create':
-                return $this->store($request);
-            default:
-                abort(404);
-        }
-    }
-
     public function store(Request $request)
 {
     $request->validate([
