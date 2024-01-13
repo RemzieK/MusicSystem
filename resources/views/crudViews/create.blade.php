@@ -1,8 +1,4 @@
 
-@extends('layouts.app')
-
-@section('content')
-
 <div style="text-align: center;">
     <h2>Create Record</h2>
     @if(session('error'))
@@ -58,4 +54,3 @@
     </form>
 </div>
 
-@endsection

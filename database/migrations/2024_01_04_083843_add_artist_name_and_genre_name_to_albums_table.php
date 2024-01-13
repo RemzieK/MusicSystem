@@ -17,10 +17,11 @@ return new class extends Migration
 
 
    
-    public function down(): void
-    {
-        Schema::table('albums', function (Blueprint $table) {
-            //
-        });
-    }
+public function down(): void
+{
+    Schema::table('albums', function (Blueprint $table) {
+        $table->dropColumn('artist_name');
+        $table->dropColumn('genre_name');
+    });
+}
 };

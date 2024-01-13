@@ -1,47 +1,16 @@
-<link rel="stylesheet" href="{{ asset('css/template.css') }}">
-<script src="{{ asset('js/template.js') }}"></script>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="author" content="templatemo">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@extends('layouts.app')
+@section('content')
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
-    <title>MusicSystem</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-liberty-market.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-  </head>
-<body>
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </div>
-  <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
+                   
                     <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="">
+                        <img src="{{asset('assets/images/logo.png')}}" alt="">
                     </a>
+                 
                     <ul class="nav">
     <li><a href="{{ url('index') }}">Home</a></li>
     <li><a href="{{ url('explore') }}">Explore</a></li>
@@ -53,7 +22,6 @@
 </form>
         </li>
     @endauth
-
     @guest
         <li><a href="{{ route('author.register') }}">Register</a></li>
         <li><a href="{{ route('login') }}"class="active">Login</a></li>
@@ -62,13 +30,13 @@
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
-                    <!-- ***** Menu End ***** -->
+                 
                 </nav>
             </div>
         </div>
     </div>
   </header>
-  <!-- ***** Header Area End ***** -->
+
   <div class="page-heading normal-space">
     <div class="container">
       <div class="row">
@@ -88,8 +56,7 @@
       </div>
     </div>
   </div>
-  @extends('layouts.app')
-@section('content')
+
   <div class="item-details-page">
     <div class="container">
       <div class="row">
@@ -122,16 +89,3 @@
     </div>
   </div>
 @endsection
-  <!-- Scripts -->
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-
-  <script src="assets/js/tabs.js"></script>
-  <script src="assets/js/popup.js"></script>
-  <script src="assets/js/custom.js"></script>
-  </body>
-</html>

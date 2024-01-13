@@ -27,11 +27,9 @@ class ImageController extends Controller
         ]);
     
         $album = Album::findOrFail($album_id);
-    
-        // Get the original image file name
+        
         $originalFileName = time().'.'.$request->image->extension();  
     
-        // Move the image to the public/images directory
         $request->image->move(public_path('images'), $originalFileName);
     
         $image = new Image;
@@ -42,20 +40,19 @@ class ImageController extends Controller
         return redirect()->route('explore'); 
     }
     
+    public function showImage($image_id)
+    {
+        $image = Image::find($image_id);
+        $album = $image->album;
 
+        return view('image.show', ['image' => $image]);
+    }
 
+    public function delete($image_id)
+    {
+        $image = Image::findOrFail($image_id);
+        $image->delete();
 
-
-// Method to display an image with its album
-public function showImage($image_id)
-{
-    $image = Image::find($image_id);
-    $album = $image->album;
-
-    // Pass the album to your view
-    return view('image.show', ['image' => $image]);
-}
-
-    
-
+        return redirect()->route('explore');
+    }
 }
