@@ -14,12 +14,7 @@ class ImageController extends Controller
         $albums = Album::all();
         return view('explore', compact('albums'));
     }
-    
-    public function uploadNew($album_id)
-    {
-        $album = Album::findOrFail($album_id);
-        return view('upload-new', compact('album')); 
-    }
+
     public function store(Request $request, $album_id)
     {
         $request->validate([
@@ -38,14 +33,6 @@ class ImageController extends Controller
         $image->save();
     
         return redirect()->route('explore'); 
-    }
-    
-    public function showImage($image_id)
-    {
-        $image = Image::find($image_id);
-        $album = $image->album;
-
-        return view('image.show', ['image' => $image]);
     }
 
     public function delete($image_id)

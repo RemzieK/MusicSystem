@@ -11,12 +11,7 @@ class AdminAuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('logout','delete','create','store','edit','update','uploadNew');
-    }
-
-    public function showRegistrationForm()
-    {
-        return view('author');
+        $this->middleware('auth')->only('logout','delete','create','store','edit','update');
     }
 
     public function register(Request $request)
@@ -42,11 +37,6 @@ class AdminAuthController extends Controller
 
     return redirect('/');
 }
-
-    public function showLoginForm()
-    {
-        return view('login');
-    }
 
     public function login(Request $request)
     {

@@ -14,8 +14,10 @@ class ExploreController extends Controller
 {
     public function index()
 {
-    $data = Album::with(['artist', 'genre', 'images'])->get();
-   
+    $data = Album::with(['artist', 'genre', 'images'])
+    ->orderBy('created_at', 'desc')
+    ->get();
+    
     $isAdmin = Auth::user() ? Auth::user()->is_admin : false;
 
     return view('explore', compact('data', 'isAdmin'));

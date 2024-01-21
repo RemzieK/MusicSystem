@@ -11,7 +11,6 @@ class Image extends Model
 
     protected $fillable = [
         'album_id',
-       
         'image_path',
     ];
     

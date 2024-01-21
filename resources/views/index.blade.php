@@ -255,7 +255,7 @@
             <div class="icon">
               <img src="{{asset('assets/images/icon-06.png')}}" alt="">
             </div>
-            <h4>Create, Update, Delete, Edit</h4>
+            <h4>Create, Update, Delete</h4>
             <p>By our user friendly interface you can create new records, update the ones left in the past, edit if you found a mistake and delete a record you don't think that should be there.</p>
           </div>
         </div>
