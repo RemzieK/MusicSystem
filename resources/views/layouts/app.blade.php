@@ -27,7 +27,7 @@
 
 <body>
 
-  <!-- ***** Preloader Start ***** -->
+  
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
       <span class="dot"></span>
@@ -38,7 +38,7 @@
       </div>
     </div>
   </div>
-  <!-- ***** Preloader End ***** -->
+
 
         <main>
             @yield('content')
@@ -46,7 +46,7 @@
     </div>
     @stack('modals')
     @livewireScripts
-<!-- Scripts -->
+
 
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>

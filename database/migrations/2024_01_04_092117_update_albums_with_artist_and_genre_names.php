@@ -9,11 +9,7 @@ use App\Models\Genre;
 
 class UpdateAlbumsWithArtistAndGenreNames extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+  
     public function up()
     {
         $albums = Album::all();
