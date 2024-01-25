@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class ArtistsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+  
     public function run()
 {
     DB::table('artists')->insert([

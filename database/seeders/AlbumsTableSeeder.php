@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class AlbumsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+   
     public function run()
     {
         $artistId1 = DB::table('artists')->where('name', 'Palaye Royale')->first()->id;
